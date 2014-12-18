@@ -1,10 +1,13 @@
 {
-    "name":        "sylius/sylius",
+    "name":        "mangogroup/sylius",
     "type":        "project",
     "description": "Modern ecommerce for Symfony2",
     "license":     "MIT",
     "homepage":    "http://sylius.org",
     "authors": [
+        {
+            "name":     "Steffen Brem"
+        },
         {
             "name":     "Paweł Jędrzejewski",
             "homepage": "http://pjedrzejewski.com"

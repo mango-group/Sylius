@@ -75,6 +75,7 @@ class LoadMetadataSubscriber implements EventSubscriber
             $attributeMapping = array(
                 'fieldName'     => 'attribute',
                 'targetEntity'  => $class['attribute']['model'],
+                'cascade'       => array('persist'),
                 'joinColumns'   => array(array(
                     'name'                 => 'attribute_id',
                     'referencedColumnName' => 'id',
