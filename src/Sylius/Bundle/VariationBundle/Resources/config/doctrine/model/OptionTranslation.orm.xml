@@ -25,7 +25,7 @@
 
         <field name="presentation" column="presentation" type="string" />
 
-        <prezent:translatable field="translatable" target-entity="Sylius\Component\Product\Model\Option" locale="locale"/>
+        <prezent:translatable field="translatable" target-entity="Mango\Component\Core\Model\ProductOption" locale="locale"/>
     </mapped-superclass>
 
 </doctrine-mapping>
