@@ -29,7 +29,7 @@
             </cascade>
         </many-to-one>
         <!--TODO Core model is mapped, do a resolver-->
-        <prezent:translatable field="translations" target-entity="Sylius\Component\Core\Model\TaxonomyTranslation" current-locale="currentLocale" fallback-locale="fallbackLocale"/>
+        <prezent:translatable field="translations" target-entity="Mango\Component\Core\Model\TaxonomyTranslation" current-locale="currentLocale" fallback-locale="fallbackLocale"/>
     </mapped-superclass>
 
 </doctrine-mapping>
