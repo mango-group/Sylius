@@ -19,6 +19,7 @@ use Sylius\Component\Promotion\Model\CouponInterface as BaseCouponInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 
+
 /**
  * Order entity.
  *
@@ -71,7 +72,7 @@ class Order extends Cart implements OrderInterface
     /**
      * Promotion coupons.
      *
-     * @var BaseCouponInterface[]
+     * @var Collection|BaseCouponInterface[]
      */
     protected $promotionCoupons;
 
@@ -98,6 +99,13 @@ class Order extends Cart implements OrderInterface
     protected $promotions;
 
     /**
+     * Identities
+     *
+     * @var Collection|IdentityInterface[]
+     */
+    protected $identities;
+
+    /**
      * Constructor.
      */
     public function __construct()
@@ -108,6 +116,7 @@ class Order extends Cart implements OrderInterface
         $this->shipments = new ArrayCollection();
         $this->promotionCoupons = new ArrayCollection();
         $this->promotions = new ArrayCollection();
+        $this->identities = new ArrayCollection();
     }
 
     /**
@@ -455,7 +464,7 @@ class Order extends Cart implements OrderInterface
     /**
      * Gets the last updated shipment of the order
      *
-     * @return null|ShipmentInterface
+     * @return false|ShipmentInterface
      */
     public function getLastShipment()
     {
