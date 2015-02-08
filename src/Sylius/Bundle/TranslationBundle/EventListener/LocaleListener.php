@@ -13,7 +13,6 @@ namespace Sylius\Bundle\TranslationBundle\EventListener;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
-use Prezent\Doctrine\Translatable\EventListener\TranslatableListener;
 
 /**
  * Inject current locale in the TranslatableListener
@@ -41,7 +40,6 @@ class LocaleListener implements EventSubscriberInterface
      * Set request locale
      *
      * @param GetResponseEvent $event
-     * @return void
      */
     public function onKernelRequest(GetResponseEvent $event)
     {
@@ -52,7 +50,7 @@ class LocaleListener implements EventSubscriberInterface
     /**
      * {@inheritdoc}
      */
-    static public function getSubscribedEvents()
+    public static function getSubscribedEvents()
     {
         return array(
             // IMPORTANT keep priority 34

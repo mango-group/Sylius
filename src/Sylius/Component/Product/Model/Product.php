@@ -13,6 +13,7 @@ namespace Sylius\Component\Product\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Sylius\Component\Archetype\Model\ArchetypeInterface as BaseArchetypeInterface;
 use Sylius\Component\Attribute\Model\AttributeValueInterface as BaseAttributeValueInterface;
 use Sylius\Component\Variation\Model\OptionInterface as BaseOptionInterface;
 use Sylius\Component\Variation\Model\VariantInterface as BaseVariantInterface;
@@ -32,6 +33,11 @@ class Product extends AbstractTranslatable implements ProductInterface
      * @var mixed
      */
     protected $id;
+
+    /**
+     * @var null|ArchetypeInterface
+     */
+    protected $archetype;
 
     /**
      * Available on.
@@ -104,6 +110,24 @@ class Product extends AbstractTranslatable implements ProductInterface
     }
 
     /**
+     * @return null|ArchetypeInterface
+     */
+    public function getArchetype()
+    {
+        return $this->archetype;
+    }
+
+    /**
+     * @param null|ArchetypeInterface $archetype
+     */
+    public function setArchetype(BaseArchetypeInterface $archetype = null)
+    {
+        $this->archetype = $archetype;
+
+        return $this;
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function getName()
@@ -132,7 +156,7 @@ class Product extends AbstractTranslatable implements ProductInterface
     /**
      * {@inheritdoc}
      */
-    public function setSlug($slug)
+    public function setSlug($slug = null)
     {
         $this->translate()->setSlug($slug);
 
@@ -524,5 +548,13 @@ class Product extends AbstractTranslatable implements ProductInterface
         $this->deletedAt = $deletedAt;
 
         return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function getTranslationEntityClass()
+    {
+        return get_class().'Translation';
     }
 }

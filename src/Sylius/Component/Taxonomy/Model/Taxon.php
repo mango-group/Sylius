@@ -223,7 +223,7 @@ class Taxon extends AbstractTranslatable implements TaxonInterface
     /**
      * {@inheritdoc}
      */
-    public function setSlug($slug)
+    public function setSlug($slug = null)
     {
         $this->translate()->setSlug($slug);
 
@@ -357,5 +357,13 @@ class Taxon extends AbstractTranslatable implements TaxonInterface
         $this->deletedAt = $deletedAt;
 
         return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function getTranslationEntityClass()
+    {
+        return get_class().'Translation';
     }
 }

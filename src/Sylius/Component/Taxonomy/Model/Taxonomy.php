@@ -10,6 +10,8 @@
  */
 
 namespace Sylius\Component\Taxonomy\Model;
+
+use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Translation\Model\AbstractTranslatable;
 
 /**
@@ -93,9 +95,19 @@ class Taxonomy extends AbstractTranslatable implements TaxonomyInterface
     /**
      * {@inheritdoc}
      */
-    public function getTaxons()
+    public function getTaxons($taxonomy = null)
     {
         return $this->root->getChildren();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setTaxons(Collection $collection)
+    {
+        foreach ($collection as $child) {
+            $this->root->addChild($child);
+        }
     }
 
     /**
@@ -124,5 +136,13 @@ class Taxonomy extends AbstractTranslatable implements TaxonomyInterface
         $this->root->removeChild($taxon);
 
         return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function getTranslationEntityClass()
+    {
+        return get_class().'Translation';
     }
 }

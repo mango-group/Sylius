@@ -11,10 +11,6 @@
 
 namespace Sylius\Component\Translation\Model;
 
-use Doctrine\ORM\Mapping as ORM;
-use Prezent\Doctrine\Translatable\Annotation as Prezent;
-use Prezent\Doctrine\Translatable\TranslatableInterface;
-use Prezent\Doctrine\Translatable\TranslationInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
@@ -25,7 +21,7 @@ abstract class AbstractTranslatable implements TranslatableInterface
     /**
      * Translations
      *
-     * @var ArrayCollection[TranslationInterface]
+     * @var TranslationInterface[]
      */
     protected $translations;
 
@@ -59,9 +55,7 @@ abstract class AbstractTranslatable implements TranslatableInterface
     }
 
     /**
-     * Get the translations
-     *
-     * @return ArrayCollection
+     * {@inheritdoc}
      */
     public function getTranslations()
     {
@@ -69,10 +63,7 @@ abstract class AbstractTranslatable implements TranslatableInterface
     }
 
     /**
-     * Add a translation
-     *
-     * @param TranslationInterface $translation
-     * @return self
+     * {@inheritdoc}
      */
     public function addTranslation(TranslationInterface $translation)
     {
@@ -85,10 +76,7 @@ abstract class AbstractTranslatable implements TranslatableInterface
     }
 
     /**
-     * Remove a translation
-     *
-     * @param TranslationInterface $translation
-     * @return self
+     * {@inheritdoc}
      */
     public function removeTranslation(TranslationInterface $translation)
     {
@@ -111,6 +99,8 @@ abstract class AbstractTranslatable implements TranslatableInterface
 
     /**
      * @param string $currentLocale
+     *
+     * @return $this
      */
     public function setCurrentLocale($currentLocale)
     {
@@ -129,6 +119,8 @@ abstract class AbstractTranslatable implements TranslatableInterface
 
     /**
      * @param TranslationInterface $currentTranslation
+     *
+     * @return $this
      */
     public function setCurrentTranslation(TranslationInterface $currentTranslation)
     {
@@ -147,6 +139,8 @@ abstract class AbstractTranslatable implements TranslatableInterface
 
     /**
      * @param string $fallbackLocale
+     *
+     * @return $this
      */
     public function setFallbackLocale($fallbackLocale)
     {
@@ -166,10 +160,11 @@ abstract class AbstractTranslatable implements TranslatableInterface
     /**
      * Translation helper method
      *
-     * @param string locale
+     * @param string $locale
+     *
+     * @return TranslationInterface
      *
      * @throws \RuntimeException
-     * @return TranslationInterface
      */
     public function translate($locale = null)
     {
@@ -203,12 +198,9 @@ abstract class AbstractTranslatable implements TranslatableInterface
     }
 
     /**
-     * Description of method
+     * Return translation entity class
      *
      * @return string
      */
-    protected function getTranslationEntityClass()
-    {
-        return get_class($this).'Translation';
-    }
+    abstract protected function getTranslationEntityClass();
 }

@@ -77,6 +77,13 @@ class Order extends Cart implements OrderInterface
     protected $promotionCoupons;
 
     /**
+     * Order checkout state.
+     *
+     * @var string
+     */
+    protected $checkoutState = OrderInterface::CHECKOUT_STATE_CART;
+
+    /**
      * Order payment state.
      *
      * @var string
@@ -99,13 +106,6 @@ class Order extends Cart implements OrderInterface
     protected $promotions;
 
     /**
-     * Identities
-     *
-     * @var Collection|IdentityInterface[]
-     */
-    protected $identities;
-
-    /**
      * Constructor.
      */
     public function __construct()
@@ -116,7 +116,6 @@ class Order extends Cart implements OrderInterface
         $this->shipments = new ArrayCollection();
         $this->promotionCoupons = new ArrayCollection();
         $this->promotions = new ArrayCollection();
-        $this->identities = new ArrayCollection();
     }
 
     /**
@@ -172,6 +171,24 @@ class Order extends Cart implements OrderInterface
     public function setBillingAddress(AddressInterface $address)
     {
         $this->billingAddress = $address;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getCheckoutState()
+    {
+        return $this->checkoutState;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setCheckoutState($checkoutState)
+    {
+        $this->checkoutState = $checkoutState;
 
         return $this;
     }
@@ -487,7 +504,7 @@ class Order extends Cart implements OrderInterface
      */
     public function isInvoiceAvailable()
     {
-        if (null !== $lastShipment = $this->getLastShipment()) {
+        if (false !== $lastShipment = $this->getLastShipment()) {
             return in_array($lastShipment->getState(), array(ShipmentInterface::STATE_RETURNED, ShipmentInterface::STATE_SHIPPED));
         }
 
